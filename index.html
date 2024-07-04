@@ -7,17 +7,19 @@
       </head>
       <body>
         <div id="root-window">
-          <div id="render-target"></div>
+          <div id="render-target">
+             <!--toolbar for users to build-->
+            <div id="ui-toolbar">
+              <button id="residential-button" class="ui-button-selected">Residential</button>
+              <button id="industry-button" class="ui-button">Industry</button>
+              <button id="park-button" class="ui-button">Park</button>
+              <button id="road-button" class="ui-button">Road</button>
+              <button id="commercial-button" class="ui-button">Commercial</button>
+            </div>
+          </div>
         </div> 
 
-        <!-- <div id="top-bar">
-          <span id="username-display"></span>
-          <span id="points-display">Points: 0</span>
-          <span id="coins-display">Coins: 16</span>
-      </div> -->
-      <!--<div id="game-container">
-           The game canvas will be injected here 
-      </div>-->
+  
        
       <!--script src dont remove-->
         <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
