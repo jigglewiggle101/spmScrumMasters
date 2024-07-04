@@ -14,7 +14,7 @@ const assets = {
     'building-1': (x,y) => {
           const material = new THREE.MeshLambertMaterial({ color: 0xFA7358 });
           const mesh = new THREE.Mesh(geometry, material);
-          mesh.userData = {id: 'building-1'};
+          mesh.userData = {id: 'building-1', x, y};
           mesh.position.set(x, 0.5, y);
           return mesh;
     },

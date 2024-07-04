@@ -21,6 +21,8 @@ export function createScene() {
   let terrain = [];
   let buildings = [];
 
+  let onObjectSelected = undefined;
+
   function initialize(city) {
     scene.clear();
     terrain = [];
@@ -94,7 +96,7 @@ export function createScene() {
         camera.onMouseDown(event);
 
         mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-        mouse.y = (event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+        mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
 
         raycaster.setFromCamera(mouse, camera.camera);
 
@@ -105,6 +107,10 @@ export function createScene() {
             selectedObject = intersections[0].object;
             selectedObject.material.emissive.setHex(0x555555);
             console.log(selectedObject.userData);  
+
+            if (this.onObjectSelected) {
+                this.onObjectSelected(selectedObject);
+            }
         }
     }
 
@@ -117,6 +123,7 @@ export function createScene() {
         }
 
       return{
+        onObjectSelected,
         initialize,
         update,
         start,
