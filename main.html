@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <div id="main-menu" class="menu">
+      <h1>Main Menu</h1>
+      <button onclick="navigateTo('arcade.html')">Start New Arcade Game</button>
+      <button onclick="navigateTo('freeplay.html')">Start New Free Play Game</button>
+      <button onclick="loadSavedGame()">Load Saved Game</button>
+      <button onclick="displayHighScores()">Display High Scores</button>
+      <button onclick="exitGame()">Exit Game</button>
+  </div>
+
+  <div id="leaderboard" class="menu" style="display: none;">
+      <h1>Leaderboard</h1>
+      <table>
+          <thead>
+              <tr>
+                  <th>Username</th>
+                  <th>Points</th>
+                  <th>Coins</th>
+              </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+              <!-- Leaderboard entries will be injected here -->
+          </tbody>
+      </table>
+      <button onclick="goToMainMenu()">Back to Main Menu</button>
+  </div>
+ 
+  <!-- Login -->
+  <script>
+    // Check if the user is authenticated
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const isAuthenticated = localStorage.getItem('isAuthenticated');
+        if (!isAuthenticated) {
+            window.location.href = 'login.html';
+        }
+    });
+</script>
+
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three/build/three.module.js"
+        }
+      }
+    </script>
+    <script src="./src/main.js"></script>
+  </body>
+</html>

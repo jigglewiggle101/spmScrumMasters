@@ -1,0 +1,41 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./public/main.css" />
+      </head>
+      <body>
+        <div id="root-window">
+          <div id="render-target"></div>
+        </div> 
+
+        <!-- <div id="top-bar">
+          <span id="username-display"></span>
+          <span id="points-display">Points: 0</span>
+          <span id="coins-display">Coins: 16</span>
+      </div> -->
+      <!--<div id="game-container">
+           The game canvas will be injected here 
+      </div>-->
+       
+      <!--script src dont remove-->
+        <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+        <script type="importmap">
+          {
+            "imports": {
+              "three": "https://unpkg.com/three/build/three.module.js"
+            }
+          }
+        </script>
+      
+        <!--script src for game-->
+        <script type="module">
+          import { createGame } from './src/game.js';
+          window.onload = () => {
+            window.game = createGame(); 
+          }
+        </script>
+      </body>
+    </html>
+ 

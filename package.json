@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "node.js": "^0.0.1-security",
+    "three": "^0.166.1",
+    "three.js": "^0.77.0"
+  },
+  "devDependencies": {
+    "vite": "^5.3.3"
+  }
+}
