@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-const cube = new THREE.BoxGeometry(1, 1, 1);
+const geometry = new THREE.BoxGeometry(1, 1, 1);
 
 // let loader = new THREE.TextureLoader();
 
@@ -31,7 +31,7 @@ const cube = new THREE.BoxGeometry(1, 1, 1);
 
 const assets = { 
     'grass': (x, y) => {
-        const material = new THREE.MeshLambertMaterial({ map: textures.grass});
+        const material = new THREE.MeshLambertMaterial({ color: 0x8CCE4E});
         const mesh = new THREE.Mesh(geometry, material);
         mesh.scale.set(1, 0.1, 1); 
         mesh.userData = { id: 'grass', x, y };

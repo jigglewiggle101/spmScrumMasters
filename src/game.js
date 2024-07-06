@@ -1,27 +1,27 @@
 // This file is responsible for creating the game object and setting up the game loop.
 import { createScene } from './scene.js';
 import { createCity } from './city.js';
-import buildings from './building.js';
+import building from './building.js';
 
-export default function createGame() {
+export function createGame() {
   let activeToolId = '';
   const scene = createScene();
   const city = createCity(20);
 
-  scene.initialise(city);
+  scene.initialize(city);
 
   scene.onObjectSelected = (selectedObject) => {
     let { x, y } = selectedObject.userData;
     const tile = city.data[x][y];
 
     if (activeToolId === 'demolition') {
-      tile.buildings = undefined;
+      tile.building = undefined;
       scene.update(city);
-    } else if (!tile.buildings) {
-      tile.building = activeToolId;
+    } else if (!tile.building) {
+      tile.building = building[activeToolId]();
       scene.update(city);
     }
-  };
+  }
 
   document.addEventListener('mousedown', scene.onMouseDown.bind(scene), false);
   document.addEventListener('mousemove', scene.onMouseMove.bind(scene), false);
