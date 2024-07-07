@@ -1,23 +1,24 @@
-// scene.js
 import * as THREE from 'three';
-import { createCamera } from './camera.js';
+import { createCamera} from './camera.js';
 import { CreateAssetInstance } from './assets.js';
+
 
 export function createScene() {
   const gameWindow = document.getElementById('render-target');
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x87ceeb);
 
-  const { camera, onMouseDown, onMouseUp, onMouseMove } = createCamera(gameWindow);
+  const camera = createCamera(gameWindow);
 
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(gameWindow.offsetWidth, gameWindow.offsetHeight);
-  gameWindow.appendChild(renderer.domElement);  
+  document.body.appendChild(renderer.domElement);  
   
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
   let selectedObject = undefined;
   let onObjectSelected = undefined;
+
 
   let terrain = [];
   let buildings = [];
@@ -63,6 +64,7 @@ export function createScene() {
     }
   }
 
+  
   function setupLights() {
     const lights = [
       new THREE.AmbientLight(0xffffff, 0.2),
@@ -81,7 +83,7 @@ export function createScene() {
   }
 
   function draw() {
-    renderer.render(scene, camera);
+    renderer.render(scene, camera.camera);
   }
 
   function start() {
@@ -92,8 +94,8 @@ export function createScene() {
     renderer.setAnimationLoop(null);
   }
 
-  function onMouseDownHandler(event) {
-    onMouseDown(event);
+  function onMouseDown(event) {
+
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     raycaster.setFromCamera(mouse, camera);
@@ -105,14 +107,14 @@ export function createScene() {
       selectedObject = intersections[0].object;
       selectedObject.material.emissive.setHex(0xff0000);
 
-      if (onObjectSelected) {
-        onObjectSelected(selectedObject);
+      if (this.onObjectSelected) {
+        this.onObjectSelected(selectedObject);
       }
     }
   }
 
-  function onMouseUpHandler(event) {
-    onMouseUp(event);
+  function onMouseUp(event) {
+   
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     raycaster.setFromCamera(mouse, camera);
@@ -124,14 +126,14 @@ export function createScene() {
       selectedObject = intersections[0].object;
       selectedObject.material.emissive.setHex(0xff0000);
 
-      if (onObjectSelected) {
-        onObjectSelected(selectedObject);
+      if (this.onObjectSelected) {
+        this.onObjectSelected(selectedObject);
       }
     }
   }
 
-  function onMouseMoveHandler(event) {
-    onMouseMove(event);
+  function onMouseMove(event) {
+   
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     raycaster.setFromCamera(mouse, camera);
@@ -143,21 +145,21 @@ export function createScene() {
       selectedObject = intersections[0].object;
       selectedObject.material.emissive.setHex(0xff0000);
 
-      if (onObjectSelected) {
-        onObjectSelected(selectedObject);
+      if (this.onObjectSelected) {
+        this.onObjectSelected(selectedObject);
       }
     }
   }
 
-  gameWindow.addEventListener('mousedown', onMouseDownHandler);
-  gameWindow.addEventListener('mouseup', onMouseUpHandler);
-  gameWindow.addEventListener('mousemove', onMouseMoveHandler);
 
   return {
     initialize,
     update,
     start,
     stop,
+    onMouseDown,
+    onMouseMove,
+    onMouseUp,
     onObjectSelected
   };
 }

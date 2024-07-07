@@ -1,7 +1,7 @@
-// camera.js
 import * as THREE from 'three';
 
 export function createCamera(gameWindow) {
+
   const DEG2RAD = Math.PI / 180.0;
   const LEFT_MOUSE_BUTTON = 0;
   const RIGHT_MOUSE_BUTTON = 1;
@@ -42,9 +42,9 @@ export function createCamera(gameWindow) {
     if (event.button === MIDDLE_MOUSE_BUTTON) {
         isMiddleMouseDown = true;
     }
-  }
+}
 
-  function onMouseUp(event) {
+function onMouseUp(event) {
     console.log('mouseup');
     if (event.button === LEFT_MOUSE_BUTTON) {
         isLeftMouseDown = false;
@@ -57,9 +57,9 @@ export function createCamera(gameWindow) {
     if (event.button === MIDDLE_MOUSE_BUTTON) {
         isMiddleMouseDown = false; 
     }
-  }
+}
 
-  function onMouseMove(event) {
+function onMouseMove(event) {
     console.log('mousemove');
 
     const deltaX = (event.clientX - prevMouseX);
@@ -73,11 +73,12 @@ export function createCamera(gameWindow) {
         updateCameraPosition();
     }
 
-    // Handles the zooming of the camera
+     // Handles the zooming of the camera
     if (isRightMouseDown) {
        cameraRadius += deltaY * ZOOM_SENSITIVITY;
        cameraRadius = Math.min(MAX_CAMERA_RADIUS, Math.max(MIN_CAMERA_RADIUS, cameraRadius));
        updateCameraPosition();
+
     }
 
     // Handles the panning of the camera
@@ -91,21 +92,22 @@ export function createCamera(gameWindow) {
 
     prevMouseX = event.clientX;
     prevMouseY = event.clientY;
-  }
+}
 
-  function updateCameraPosition() {
+function updateCameraPosition() {
     camera.position.x = cameraRadius * Math.sin(cameraAzimuth * DEG2RAD) * Math.cos(cameraElevation * DEG2RAD);
     camera.position.z = cameraRadius * Math.cos(cameraAzimuth * DEG2RAD) * Math.cos(cameraElevation * DEG2RAD);
     camera.position.y = cameraRadius * Math.sin(cameraElevation * DEG2RAD);
     camera.position.add(cameraOrigin);
     camera.lookAt(cameraOrigin);
     camera.updateMatrix();
-  }
+}
 
-  return {
+
+return {
     camera,
     onMouseDown,
     onMouseUp,
     onMouseMove
-  };
+};
 }
