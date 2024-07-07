@@ -8,7 +8,7 @@ export function setupAudio(camera) {
 
     // Load your audio file (use an absolute URL if needed)
     const audioLoader = new THREE.AudioLoader();
-    audioLoader.load('/public/audio/game.mp3', function(buffer) {
+    audioLoader.load('./audio/game.mp3', function(buffer) {
         // Set the loaded buffer as the Audio object's buffer
         sound.setBuffer(buffer);
         sound.setLoop(true); // Set to true if you want the audio to loop
