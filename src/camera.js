@@ -85,7 +85,7 @@ function onMouseMove(event) {
     if (isMiddleMouseDown) {
         const forward = new THREE.Vector3(0, 0, 1).applyAxisAngle(Y_AXIS, cameraAzimuth * DEG2RAD);
         const left = new THREE.Vector3(1, 0, 0).applyAxisAngle(Y_AXIS, cameraAzimuth * DEG2RAD);
-        cameraOrigin.add(forward.multiplyScalar(deltaY * PAN_SENSITIVITY));
+        cameraOrigin.add(forward.multiplyScalar(PAN_SENSITIVITY * deltaY));
         cameraOrigin.add(left.multiplyScalar(PAN_SENSITIVITY * deltaX));
         updateCameraPosition();
     }
@@ -108,6 +108,7 @@ return {
     camera,
     onMouseDown,
     onMouseUp,
-    onMouseMove
+    onMouseMove,
+    updateCameraPosition
 };
 }

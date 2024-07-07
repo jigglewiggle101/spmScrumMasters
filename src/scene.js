@@ -77,9 +77,8 @@ export function createScene() {
     lights[2].position.set(1, 1, 0);
     lights[3].position.set(0, 1, 1);
 
-    for (let light of lights) {
-      scene.add(light);
-    }
+      scene.add(...lights);
+    
   }
 
   function draw() {
@@ -98,7 +97,7 @@ export function createScene() {
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
+    raycaster.setFromCamera(mouse, camera.camera);
 
     let intersections = raycaster.intersectObjects(scene.children, false);
 
@@ -117,7 +116,7 @@ export function createScene() {
    
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
+    raycaster.setFromCamera(mouse, camera.camera);
 
     let intersections = raycaster.intersectObjects(scene.children, false);
 
@@ -136,7 +135,7 @@ export function createScene() {
    
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
+    raycaster.setFromCamera(mouse, camera.camera);
 
     let intersections = raycaster.intersectObjects(scene.children, false);
 
@@ -160,6 +159,7 @@ export function createScene() {
     onMouseDown,
     onMouseMove,
     onMouseUp,
-    onObjectSelected
+    onObjectSelected,
+    camera
   };
 }
